@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import './components/header';
 
 * {
   background-color: #a1aaad;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
   height: 300px;
   width: 350px;
+  border: 1px solid orange;
 }
