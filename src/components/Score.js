@@ -22,7 +22,7 @@ export default class Score extends Component {
   }
 
   render() {
-    console.log(btoa(process.env.REACT_APP_KEY1 + ':' + process.env.REACT_APP_KEY2));
+    console.log(process.env.REACT_APP_KEY1 + ':' + process.env.REACT_APP_KEY2);
     return <div>This is where the score should go.</div>;
   }
 }
