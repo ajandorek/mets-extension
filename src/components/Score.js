@@ -28,7 +28,25 @@ export default class Score extends Component {
     });
   }
 
+  noGameToday() {
+    return <h3>No Game Today! Come back tomorrow for more Mets baseball :) </h3>;
+  }
+
+  gameToday() {
+    return (
+      <div>
+        <h3>The Mets Play Today!</h3>
+        <p>
+          {this.state.awayTeam} vs. {this.state.homeTeam}
+        </p>
+        <p>Game Details For {this.state.date}</p>
+        <p>First Pitch: {this.state.time}</p>
+        <p>Location: {this.state.location}</p>
+      </div>
+    );
+  }
+
   render() {
-    return <div>This is where the score should go.</div>;
+    return this.state.game ? this.gameToday() : this.noGameToday();
   }
 }
