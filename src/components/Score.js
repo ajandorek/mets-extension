@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { todaysGame } from '../helpers/getSched';
+import { BounceLoader } from 'halogenium';
 
 export default class Score extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      res: false,
       game: false,
       date: 0,
       time: 0,
@@ -15,6 +17,7 @@ export default class Score extends Component {
   }
   componentDidMount() {
     todaysGame().then(res => {
+      // this.setState({ res: true });
       if (res.data.dailygameschedule.gameentry) {
         this.setState({
           game: true,
@@ -47,6 +50,14 @@ export default class Score extends Component {
   }
 
   render() {
-    return this.state.game ? this.gameToday() : this.noGameToday();
+    return this.state.res ? (
+      this.state.game ? (
+        this.gameToday()
+      ) : (
+        this.noGameToday()
+      )
+    ) : (
+      <BounceLoader color="#002d72" size="100px" />
+    );
   }
 }
