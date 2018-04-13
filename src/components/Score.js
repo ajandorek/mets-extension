@@ -57,7 +57,7 @@ export default class Score extends Component {
         this.noGameToday()
       )
     ) : (
-      <BounceLoader color="#002d72" size="100px" />
+      <BounceLoader color="#002d72" size="100px" className="loader" />
     );
   }
 }
