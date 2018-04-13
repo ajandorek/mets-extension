@@ -17,7 +17,7 @@ export default class Score extends Component {
   }
   componentDidMount() {
     todaysGame().then(res => {
-      // this.setState({ res: true });
+      this.setState({ res: true });
       if (res.data.dailygameschedule.gameentry) {
         this.setState({
           game: true,
