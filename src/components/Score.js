@@ -1,38 +1,25 @@
 import React, { Component } from 'react';
-import { todaysGame } from '../helpers/getSched';
+import { todaysGame, todaysStarters } from '../helpers/getSched';
 import { BounceLoader } from 'halogenium';
 
 export default class Score extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      gameId: 0,
       res: false,
       game: false,
       date: 0,
       time: 0,
       homeTeam: '',
       awayTeam: '',
+      homeStarter: '',
+      awayStarter: '',
       location: ''
     };
   }
   componentDidMount() {
-    todaysGame().then(res => {
-      this.setState({ res: true });
-      if (res.data.dailygameschedule.gameentry) {
-        this.setState({
-          game: true,
-          date: res.data.dailygameschedule.gameentry[0].date,
-          time: res.data.dailygameschedule.gameentry[0].time,
-          homeTeam: res.data.dailygameschedule.gameentry[0].homeTeam.Abbreviation,
-          awayTeam: res.data.dailygameschedule.gameentry[0].awayTeam.Abbreviation,
-          location: res.data.dailygameschedule.gameentry[0].location
-        });
-      }
-    });
-  }
-
-  noGameToday() {
-    return <h3>No Game Today! Come back tomorrow for more Mets baseball :) </h3>;
+    this.gameInfo();
   }
 
   gameToday() {
@@ -47,6 +34,38 @@ export default class Score extends Component {
         <p>Location: {this.state.location}</p>
       </div>
     );
+  }
+
+  gameInfo() {
+    todaysGame().then(res => {
+      this.setState({ res: true });
+      if (res.data.dailygameschedule.gameentry) {
+        this.setState({
+          gameId: res.data.dailygameschedule.gameentry[0].id,
+          game: true,
+          date: res.data.dailygameschedule.gameentry[0].date,
+          time: res.data.dailygameschedule.gameentry[0].time,
+          homeTeam: res.data.dailygameschedule.gameentry[0].homeTeam.Abbreviation,
+          awayTeam: res.data.dailygameschedule.gameentry[0].awayTeam.Abbreviation,
+          location: res.data.dailygameschedule.gameentry[0].location
+        });
+        if (this.state.game) {
+          this.gameStarters(this.state.gameId);
+        }
+      }
+    });
+  }
+
+  gameStarters(gameId) {
+    todaysStarters(gameId).then(res => {
+      const gameInfo = res.data.gamestartinglineup.teamLineup;
+      if (gameInfo) {
+      }
+    });
+  }
+
+  noGameToday() {
+    return <h3>No Game Today! Come back tomorrow for more Mets baseball :) </h3>;
   }
 
   render() {
