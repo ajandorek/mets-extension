@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { todaysGame, todaysStarters } from '../helpers/getSched';
-import { BounceLoader } from 'halogenium';
+import { BounceLoader, PulseLoader } from 'halogenium';
 
 export default class Score extends Component {
   constructor(props) {
@@ -13,8 +13,7 @@ export default class Score extends Component {
       time: 0,
       homeTeam: '',
       awayTeam: '',
-      homeStarter: '',
-      awayStarter: '',
+      pitchers: [],
       location: ''
     };
   }
@@ -23,6 +22,7 @@ export default class Score extends Component {
   }
 
   gameToday() {
+    console.log(this.state.pitchers);
     return (
       <div>
         <h3>The Mets Play Today!</h3>
@@ -30,6 +30,14 @@ export default class Score extends Component {
           {this.state.awayTeam} vs. {this.state.homeTeam}
         </p>
         <p>Game Details For {this.state.date}</p>
+        <h4>Pitching Matchup</h4>
+        {this.state.pitchers.length > 0 ? (
+          <p>
+            {this.state.pitchers[0].player.LastName} vs. {this.state.pitchers[1].player.LastName}
+          </p>
+        ) : (
+          <PulseLoader color="#002d72" className="loader" />
+        )}
         <p>First Pitch: {this.state.time}</p>
         <p>Location: {this.state.location}</p>
       </div>
@@ -58,8 +66,18 @@ export default class Score extends Component {
 
   gameStarters(gameId) {
     todaysStarters(gameId).then(res => {
+      const startingPitchers = [];
       const gameInfo = res.data.gamestartinglineup.teamLineup;
       if (gameInfo) {
+        gameInfo.filter(obj => {
+          obj.expected.starter.filter(a => {
+            if (a.position === 'P') {
+              startingPitchers.push(a);
+            }
+          });
+        });
+        console.log(startingPitchers);
+        this.setState({ pitchers: startingPitchers });
       }
     });
   }
