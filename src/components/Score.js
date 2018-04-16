@@ -30,7 +30,7 @@ export default class Score extends Component {
           {this.state.awayTeam} vs. {this.state.homeTeam}
         </p>
         <p>Game Details For {this.state.date}</p>
-        <h4>Pitching Matchup</h4>
+        <h3>Pitching Matchup</h3>
         {this.state.pitchers.length > 0 ? (
           <p>
             {this.state.pitchers[0].player.LastName} vs. {this.state.pitchers[1].player.LastName}
