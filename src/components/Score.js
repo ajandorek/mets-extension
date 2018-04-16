@@ -25,8 +25,8 @@ export default class Score extends Component {
     console.log(this.state.pitchers);
     return (
       <div>
-        <h3>The Mets Play Today!</h3>
-        <p>
+        <h2>The Mets Play Today!</h2>
+        <p className="teams">
           {this.state.awayTeam} vs. {this.state.homeTeam}
         </p>
         <p>Game Details For {this.state.date}</p>
@@ -76,7 +76,6 @@ export default class Score extends Component {
             }
           });
         });
-        console.log(startingPitchers);
         this.setState({ pitchers: startingPitchers });
       }
     });
