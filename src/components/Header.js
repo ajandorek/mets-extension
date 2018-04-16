@@ -4,9 +4,9 @@ import logo from '../images/metslogo.png';
 export default class Header extends Component {
   render() {
     return (
-      <h3>
+      <h1>
         Do the <img className="metsLogo" alt="mets logo" src={logo} /> play today?
-      </h3>
+      </h1>
     );
   }
 }
