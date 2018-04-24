@@ -48,3 +48,11 @@ The app will run in the browser for dev purposes but to run as intended follow t
 2.  Navigate to `chrome://extensions`
 3.  Click `Load Unpacked` and navigate to your newly created build folder.
 4.  enjoy your new chrome extension and LGM🍎!
+
+Technologies Used:
+
+```
+1. React
+2. Axios
+3. SCSS
+```
