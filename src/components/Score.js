@@ -43,7 +43,7 @@ export default class Score extends Component {
           {this.state.time}
         </p>
         <p>
-          <span>Location:</span> {this.state.location}
+          <span className="teams">Location:</span> {this.state.location}
         </p>
       </div>
     );
