@@ -38,8 +38,13 @@ export default class Score extends Component {
         ) : (
           <PulseLoader color="#002d72" className="loader" />
         )}
-        <p>First Pitch: {this.state.time}</p>
-        <p>Location: {this.state.location}</p>
+        <p>
+          <span className="teams">First Pitch:</span>
+          {this.state.time}
+        </p>
+        <p>
+          <span>Location:</span> {this.state.location}
+        </p>
       </div>
     );
   }
